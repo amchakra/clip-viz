@@ -82,7 +82,7 @@ process BIGWIG {
     def strand_name = (strand == 'reverse') ? 'F' : 'R'
     
     """
-    SCALE_FACTOR=`gunzip -c \$bed | awk '{TOTAL+=\$5}END{print 1e6/TOTAL}'`
+    SCALE_FACTOR=`gunzip -c $bed | awk 'BEGIN {total=0} {total+=\$5} END {print 1e6/total}'`
 
     bamCoverage -p $task.cpus \
     --binSize $bin_size \
