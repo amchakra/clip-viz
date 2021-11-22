@@ -71,7 +71,7 @@ process BIGWIG {
     input:
         tuple val(sample_id), path(bed)
         tuple val(sample_id), path(bam), path(bai)
-        val(strand)
+        each strand
 
     output:
         tuple val(sample_id), path("*.bigwig"), emit: bigwig

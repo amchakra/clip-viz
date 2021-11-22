@@ -14,7 +14,7 @@ nextflow.enable.dsl=2
 
 // Inputs
 ch_fai = Channel.fromPath(params.fai, checkIfExists: true)
-ch_strands = Channel.of('reverse', 'forward')
+strands = ['reverse', 'forward']
 
 // Processes
 include { METADATA } from './modules/metadata.nf'
@@ -54,6 +54,6 @@ workflow {
     // Bigwigs
     BEDTOBAM(METADATA.out, ch_fai.collect())
     SORTINDEXBAM(BEDTOBAM.out.bam)
-    BIGWIG(METADATA.out, SORTINDEXBAM.out.bam, ch_strands)
+    BIGWIG(METADATA.out, SORTINDEXBAM.out.bam, strands)
 
 }
