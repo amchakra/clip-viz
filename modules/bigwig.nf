@@ -90,7 +90,7 @@ process BIGWIG {
     --scaleFactor \$SCALE_FACTOR \
     --filterRNAstrand $strand \
     -b $bam \
-    -o ${sample_id}.${strand_name}.xpm.bigwig
+    -o ${sample_id}.xpm.${bin_size}bin_${smooth_length}smooth_${strand_name}.bigwig
     """
 
 }
