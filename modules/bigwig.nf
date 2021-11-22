@@ -23,7 +23,7 @@ process BEDTOBAM {
 
     script:
     """
-    gunzip -c zcat $bed | \
+    gunzip -c $bed | \
     awk '{for(i=1; i<=\$5; i++) print}' | \
     bedtools bedtobam -i /dev/stdin -g $fai \
     > ${sample_id}.unsorted.bam
