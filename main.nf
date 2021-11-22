@@ -52,7 +52,7 @@ workflow {
     BEDGRAPH(METADATA.out)
 
     // Bigwigs
-    BEDTOBAM(METADATA.out)
+    BEDTOBAM(METADATA.out, ch_fai)
     SORTINDEXBAM(BEDTOBAM.out.bam)
     BIGWIG(METADATA.out, SORTINDEXBAM.out.bam, ch_strands)
 
