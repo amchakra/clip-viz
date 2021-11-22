@@ -39,7 +39,7 @@ def settings = [:]
 settings['Input'] = params.input
 settings['FAI'] = params.fai
 settings['Bin size'] = params.bin_size
-settings['Smoothing window'] = params.smoothing_window
+settings['Smooth length'] = params.smooth_length
 log.info settings.collect { k,v -> "${k.padRight(25)}: $v" }.join("\n")
 log.info "-----------------------------------------------------------------"
 
