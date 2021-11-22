@@ -20,8 +20,8 @@ process BEDGRAPH {
         tuple val(sample_id), path(bed)
 
     output:
-        tuple val(sample_id), path("${bed.simpleName}.raw.bedgraph.gz"), emit: rawbedgraph
-        tuple val(sample_id), path("${bed.simpleName}.xpm.bedgraph.gz"), emit: normbedgraph
+        tuple val(sample_id), path("${sample_id}.raw.bedgraph.gz"), emit: rawbedgraph
+        tuple val(sample_id), path("${sample_id}.xpm.bedgraph.gz"), emit: normbedgraph
 
 
     script:
@@ -29,7 +29,7 @@ process BEDGRAPH {
     # Raw bedgraphs
     gunzip -c $bed | \
     awk '{OFS = "\t"}{if (\$6 == "+") {print \$1, \$2, \$3, \$5} else {print \$1, \$2, \$3, -\$5}}' | \
-    gzip > ${bed.simpleName}.raw.bedgraph.gz
+    gzip > ${sample_id}.raw.bedgraph.gz
     
     # Normalised bedgraphs
     TOTAL=`gunzip -c $bed | awk 'BEGIN {total=0} {total=total+\$5} END {print total}'`
@@ -40,7 +40,7 @@ process BEDGRAPH {
     awk -v total=\$TOTAL '{printf "%s\\t%i\\t%i\\t%s\\t%f\\t%s\\n", \$1, \$2, \$3, \$4, 1000000*\$5/total, \$6}' | \
     awk '{OFS = "\t"}{if (\$6 == "+") {print \$1, \$2, \$3, \$5} else {print \$1, \$2, \$3, -\$5}}' | \
     sort -k1,1 -k2,2n | \
-    gzip > ${bed.simpleName}.xpm.bedgraph.gz
+    gzip > ${sample_id}.xpm.bedgraph.gz
     """
 
 }
