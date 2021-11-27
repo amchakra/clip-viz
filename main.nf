@@ -54,6 +54,7 @@ workflow {
     // Bigwigs
     BEDTOBAM(METADATA.out, ch_fai.collect())
     SORTINDEXBAM(BEDTOBAM.out.bam)
-    BIGWIG(METADATA.out, SORTINDEXBAM.out.bam, strands)
+    BIGWIG(METADATA.out.join(SORTINDEXBAM.out.bam), strands)
+    // BIGWIG(METADATA.out, SORTINDEXBAM.out.bam, strands)
 
 }

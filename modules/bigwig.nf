@@ -69,8 +69,8 @@ process BIGWIG {
     }
 
     input:
-        tuple val(sample_id), path(bed)
-        tuple val(sample_id), path(bam), path(bai)
+        tuple val(sample_id), path(bed), path(bam), path(bai)
+        // tuple val(sample_id), path(bam), path(bai)
         each strand
 
     output:
